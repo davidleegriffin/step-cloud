@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../components/EditScreenInfo';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Platform, ScrollView, ImageBackground, Image } from 'react-native';
+// import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
 export default function TabTwoScreen() {
@@ -9,24 +8,32 @@ export default function TabTwoScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      {/* <EditScreenInfo path="/screens/TabTwoScreen.tsx" /> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  contentContainer: {
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 20,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  bgImage: {
+    flex: 1,
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  image: {
+    margin: 20,
+    width: 300,
+    height: 300,
+  },
+  picker: {
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
   },
 });

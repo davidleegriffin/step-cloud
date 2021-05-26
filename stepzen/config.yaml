@@ -1,0 +1,6 @@
+configurationset:
+  - configuration:
+      name: cloudinary_config
+      api_key: 263779551211119
+      api_secret: 1sBGgk_GV_xo4dIFqknF4a6i-wg
+      cloud_name: davidleegriffin
