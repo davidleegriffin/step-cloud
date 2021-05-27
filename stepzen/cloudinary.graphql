@@ -54,7 +54,7 @@ type Mutation {
         { field: "image", path: "url" }
       ]
       resultroot: ""
-      endpoint: "https://us-central1-stepzen-web-staging.cloudfunctions.net/cloudinarySDK?publicId=$publicId;&image=$image;&folder=$folder;&api_key=$api_key;&api_secret=$api_secret;&cloud_name=$cloud_name;"
+      endpoint: "https://cloudbackend.ngrok.io?publicId=$publicId;&image=$image;&folder=$folder;&api_key=$api_key;&api_secret=$api_secret;&cloud_name=$cloud_name;"
       configuration: "cloudinary_config"
     )
 }

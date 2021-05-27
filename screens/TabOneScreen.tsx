@@ -1,13 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Platform, Image } from "react-native";
+import { StyleSheet, Platform, Image, Button } from "react-native";
 import { useForm } from "react-hook-form";
 import { Text, View } from "../components/Themed";
-import Button from '../components/Button';
 import * as ImagePicker from 'expo-image-picker';
 
+// import Button from '../components/Button';
+import Input from '../components/Input';
+
+import { gql, useMutation } from "@apollo/client";
+
+const CREATE_IMAGE = gql`
+mutation createImage($folder: String!, $imageOne: String!, $publicId: String!) {
+	createImage(
+    folder: $folder
+    image: $imageOne
+    publicId: $publicId
+  ) {
+    publicId
+    image
+  }
+}
+`;
 
 export default function TabOneScreen() {
-	const [image, setImage] = useState();
+	let publicId;
+    let imageOne;
+    let folder;
+    const [createImage, { data }] = useMutation(CREATE_IMAGE);
+
+	const [image, setImage] = useState("");
 
 	const { handleSubmit, register, errors } = useForm();
 	const onSubmit = values => console.log(values);
@@ -33,16 +54,62 @@ export default function TabOneScreen() {
 	
 		
 		if (!result.cancelled) {
-		//   console.log('result', result);
+		  console.log('result', result);
 		  setImage(result.uri);
 		  console.log('local-image', image);
 		} 
 	  
 	  };
 
+	  if(image) {
+		  console.log('local-image', image);
+	  }
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>Home</Text>
+				<Input name="name" label="Name " />
+				<Input name="email" label="Email" />
+				<Input name="password" label="Password" secureTextEntry={true} />
+				<Button title="submit" onPress={handleSubmit(onSubmit)} />
+			{/* <form
+                    onSubmit={(e) => {
+                    e.preventDefault();
+                    createImage({
+                        variables: {
+							publicId: publicId.value,
+							folder: folder.value,
+							imageOne: imageOne.value,
+                        },
+                    });
+                    publicId.value = "";
+                    imageOne.value = "";
+                    folder.value = "";
+                    }}
+                >
+				<input
+                type="text" className="form-control"  placeholder="sam@stepzen.com"
+                ref={(node) => {
+                    folder = node;
+                }}
+                />
+				<input
+                type="text" className="form-control"  placeholder="sam@stepzen.com"
+                ref={(node) => {
+                    imageOne = node;
+                }}
+                />
+				<input
+                type="text" className="form-control"  placeholder="sam@stepzen.com"
+                ref={(node) => {
+                    publicId = node;
+                }}
+                />
+              <button
+                type="submit"
+                className="btn btn-primary px-4">Send Email</button>
+			</form> */}
+			{/*
+			
 			<View
 				style={styles.separator}
 				lightColor="#eee"
@@ -58,7 +125,8 @@ export default function TabOneScreen() {
 						<input placeholder="folder" {...register("folder")} />
 						<button type="submit">Submit</button>
 					</form>
-				}
+				} 
+				*/}
 		</View>
 	);
 }
