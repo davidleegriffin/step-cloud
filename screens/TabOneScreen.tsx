@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Platform, Image } from "react-native";
-// import { fromPromise, useQuery } from "@apollo/client";
+import { useForm } from "react-hook-form";
 import { Text, View } from "../components/Themed";
 import Button from '../components/Button';
 import * as ImagePicker from 'expo-image-picker';
@@ -8,6 +8,9 @@ import * as ImagePicker from 'expo-image-picker';
 
 export default function TabOneScreen() {
 	const [image, setImage] = useState();
+
+	const { handleSubmit, register, errors } = useForm();
+	const onSubmit = values => console.log(values);
 
 	useEffect(() => {
 		(async () => {
@@ -30,9 +33,9 @@ export default function TabOneScreen() {
 	
 		
 		if (!result.cancelled) {
-		  console.log('result', result);
+		//   console.log('result', result);
 		  setImage(result.uri);
-		  // console.log('local-image', image);
+		  console.log('local-image', image);
 		} 
 	  
 	  };
@@ -46,9 +49,16 @@ export default function TabOneScreen() {
 				darkColor="rgba(255,255,255,0.1)"
 			/>
 			<View style={styles.picker}>
-				<Button onPress={() => pickImage()}>Select Image</Button>
-				{image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+				<Button onPress={pickImage}>Select Image</Button>
+				{image && <Image source={{ uri: image }} style={{ width: 300, height: 300 }} />}
         	</View>
+				{image &&
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<input placeholder="name" {...register("name")} />
+						<input placeholder="folder" {...register("folder")} />
+						<button type="submit">Submit</button>
+					</form>
+				}
 		</View>
 	);
 }
