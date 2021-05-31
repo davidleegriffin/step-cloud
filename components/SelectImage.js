@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button = ({ onPress, children, backgroundColor }) => {
+const SelectImage = ({ onPress, children, backgroundColor }) => {
   const btnStyle = backgroundColor ? [styles.buttonStyle, { backgroundColor }] : styles.buttonStyle;
   return (
     <TouchableHighlight
@@ -33,4 +33,4 @@ const Button = ({ onPress, children, backgroundColor }) => {
   );
 };
 
-export default Button;
+export default SelectImage;

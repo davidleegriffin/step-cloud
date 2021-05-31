@@ -44,7 +44,7 @@ type createImage {
   bytes: Float
 }
 type Mutation {
-  createImage(image: String!, folder: String!, publicId: String!): createImage
+  createImage(data_type: String!, image: String!, folder: String!, publicId: String!, upload_preset: String!): createImage
     @rest(
       setters: [
         { field: "assetId", path: "asset_id" }
@@ -54,7 +54,7 @@ type Mutation {
         { field: "image", path: "url" }
       ]
       resultroot: ""
-      endpoint: "https://cloudbackend.ngrok.io?publicId=$publicId;&image=$image;&folder=$folder;&api_key=$api_key;&api_secret=$api_secret;&cloud_name=$cloud_name;"
+      endpoint: "https://cloudbackend.ngrok.io?data_type=$data_type;&upload_preset=$upload_preset;&publicId=$publicId;&image=$image;&folder=$folder;&api_key=$api_key;&api_secret=$api_secret;&cloud_name=$cloud_name;"
       configuration: "cloudinary_config"
     )
 }

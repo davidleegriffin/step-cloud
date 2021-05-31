@@ -3,14 +3,26 @@
 import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { t } from 'react-native-tailwindcss';
+import { Controller } from "react-hook-form";
 
 export default function Input(props) {
   return (
     <View style={styles.wrapper}>
-      <TextInput
-        style={[styles.input, props.error && t.borderRed500, props.style]}
-        {...props}
-      />
+        <Controller
+					control={props.control}
+					render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                        style={[styles.input, props.error && t.borderRed500, props.style]}
+                        {...props}
+                        onBlur={onBlur}
+						onChangeText={value => onChange(value)}
+						value={value}
+                      />
+					)}
+					name={props.name}
+					rules={{ required: true }}
+					defaultValue=""
+				/>
       {props.errorText && (
         <Text style={styles.errorText}>{props.errorText}</Text>
       )}
