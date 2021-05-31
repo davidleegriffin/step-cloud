@@ -18,9 +18,9 @@ const client = new ApolloClient({
 	link: createHttpLink({
 		credentials: "same-origin",
 		headers: {
-			Authorization: `Apikey sam::steprz.io+1000::e542f9dcfb3f00df356f3d2a71aa887b0c60a183bc6e8e2055c907b0fbcb13d9`,
+			Authorization: `Apikey {{key}}`,
 		},
-		uri: "https://sam.steprz.net/api/native/__graphql",
+		uri: "{{endpoint}}",
 	}),
 	cache: new InMemoryCache(),
 });
