@@ -1,16 +1,53 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Platform, Image } from "react-native";
-import { useForm } from "react-hook-form";
+import { StyleSheet, Platform, Image, Button, TextInput } from "react-native";
+import { useForm, Controller } from "react-hook-form";
 import { Text, View } from "../components/Themed";
-import Button from '../components/Button';
 import * as ImagePicker from 'expo-image-picker';
+import { t } from 'react-native-tailwindcss';
 
+import SelectImage from '../components/SelectImage';
+import Input from '../components/Input';
+
+import { gql, useMutation } from "@apollo/client";
+
+const CREATE_IMAGE = gql`
+mutation createImage($folder: String!, $imageOne: String!, $publicId: String!) {
+	createImage(
+    folder: $folder
+    image: $imageOne
+    publicId: $publicId
+  ) {
+    publicId
+    image
+  }
+}
+`;
 
 export default function TabOneScreen() {
-	const [image, setImage] = useState();
+	let publicId;
+    let imageOne;
+    let folder;
+    const [createImage, { data }] = useMutation(CREATE_IMAGE);
 
-	const { handleSubmit, register, errors } = useForm();
-	const onSubmit = values => console.log(values);
+	const [image, setImage] = useState("");
+
+	const { control, handleSubmit, formState: { errors } } = useForm();
+	const onSubmit = (data: any, e: any) => {
+		console.log('data', data)
+		console.log('email', data.email)
+		console.log('image in here', image)
+		e.preventDefault();
+		createImage({
+			variables: {
+				publicId: data.publicId,
+				folder: data.folder,
+				imageOne: data.imageOne,
+			},
+		});
+		// e.target.reset();
+	  };
+
+	// const onSubmit = data => console.log(data);
 
 	useEffect(() => {
 		(async () => {
@@ -27,38 +64,34 @@ export default function TabOneScreen() {
 		  let result = await ImagePicker.launchImageLibraryAsync({
 			mediaTypes: ImagePicker.MediaTypeOptions.Images,
 			allowsEditing: true,
+			base64: true,
 			aspect: [4, 3],
 			quality: 1,
 		  });
 	
 		
 		if (!result.cancelled) {
-		//   console.log('result', result);
+		  console.log('result', result);
 		  setImage(result.uri);
 		  console.log('local-image', image);
-		} 
-	  
+		}
+
 	  };
 
+	  if(image) {
+		  console.log('local-image', image);
+	  }
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>Home</Text>
-			<View
-				style={styles.separator}
-				lightColor="#eee"
-				darkColor="rgba(255,255,255,0.1)"
-			/>
-			<View style={styles.picker}>
-				<Button onPress={pickImage}>Select Image</Button>
-				{image && <Image source={{ uri: image }} style={{ width: 300, height: 300 }} />}
-        	</View>
-				{image &&
-					<form onSubmit={handleSubmit(onSubmit)}>
-						<input placeholder="name" {...register("name")} />
-						<input placeholder="folder" {...register("folder")} />
-						<button type="submit">Submit</button>
-					</form>
-				}
+				<Input name="publicId" label="PublicId" control={control} />
+				<Input name="folder" label="Folder" control={control} />
+				<Input name="imageOne" label="Image" control={control}/>
+				<SelectImage onPress={pickImage} backgroundColor="blue">
+					<Text style={styles.title}>Select Image</Text>
+				</SelectImage>
+				{/* {image && <Image source={{ uri: image }} style={{ width: 300, height: 300 }} />} */}
+				<Button title="submit" onPress={handleSubmit(onSubmit)} />
 		</View>
 	);
 }
@@ -85,3 +118,18 @@ const styles = StyleSheet.create({
 		width: 200,
 	  },
 });
+
+const inputstyles = {
+	wrapper: [t.selfStretch, t.mB5],
+	input: [
+	  t.h11,
+	  t.border,
+	  t.selfStretch,
+	  t.p2,
+	  t.borderGray500,
+	  t.rounded,
+	  t.textBase,
+	  t.textGray700
+	],
+	errorText: [t.mT1, t.textRed500]
+  };
