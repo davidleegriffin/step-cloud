@@ -33,7 +33,7 @@ export default function TabOneScreen() {
 	
 		
 		if (!result.cancelled) {
-		//   console.log('result', result);
+		  console.log('result', result.uri);
 		  setImage(result.uri);
 		  console.log('local-image', image);
 		} 
