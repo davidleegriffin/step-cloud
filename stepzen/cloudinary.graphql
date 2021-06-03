@@ -44,17 +44,28 @@ type createImage {
   bytes: Float
 }
 type Mutation {
-  createImage(data_type: String!, image: String!, folder: String!, publicId: String!, upload_preset: String!): createImage
-    @rest(
-      setters: [
-        { field: "assetId", path: "asset_id" }
-        { field: "publicId", path: "public_id" }
-        { field: "format", path: "format" }
-        { field: "bytes", path: "bytes" }
-        { field: "image", path: "url" }
-      ]
-      resultroot: ""
-      endpoint: "https://us-central1-stepzen-web-staging.cloudfunctions.net/cloudinaryRestPost?data_type=$data_type;&upload_preset=$upload_preset;&publicId=$publicId;&image=$image;&folder=$folder;&api_key=$api_key;&api_secret=$api_secret;&cloud_name=$cloud_name;"
-      configuration: "cloudinary_config"
-    )
+#   createImage(data_type: String!, image: String!, folder: String!, publicId: String!, upload_preset: String!): createImage
+#     @rest(
+#       setters: [
+#         { field: "assetId", path: "asset_id" }
+#         { field: "publicId", path: "public_id" }
+#         { field: "format", path: "format" }
+#         { field: "bytes", path: "bytes" }
+#         { field: "image", path: "url" }
+#       ]
+#       resultroot: ""
+#       endpoint: "https://cloudbackend.ngrok.io?data_type=$data_type;&upload_preset=$upload_preset;&publicId=$publicId;&folder=$folder;&api_key=$api_key;&api_secret=$api_secret;&cloud_name=$cloud_name;"
+#       configuration: "cloudinary_config"
+#     )
+	createImage(image: String!, folder: String!, publicId: String!): Image
+		@rest(
+		method: POST
+		setters: [
+			{ field: "assetId", path: "asset_id" }
+			{ field: "publicId", path: "public_id" }
+      	]
+		postbody: "file={{.Get \\\"image\\\"}}&public_id={{.Get \\\"publicId\\\"}}&upload_preset={{.Get \\\"upload_preset\\\"}}&folder={{.Get \\\"folder\\\"}}"
+		endpoint: "https://api.cloudinary.com/v1_1/$cloud_name/image/upload"
+		configuration: "cloudinary_mutation"
+		)
 }
