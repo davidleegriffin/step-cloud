@@ -18,15 +18,15 @@ mutation createImage($folder: String!, $imageOne: String!, $publicId: String!) {
     publicId: $publicId
   ) {
     publicId
-    image
+    url
+    format
+    assetId
+    bytes
   }
 }
 `;
 
 export default function TabOneScreen() {
-	let publicId;
-    let imageOne;
-    let folder;
     const [createImage, { data }] = useMutation(CREATE_IMAGE);
 
 	const [image, setImage] = useState("");
@@ -34,20 +34,16 @@ export default function TabOneScreen() {
 	const { control, handleSubmit, formState: { errors } } = useForm();
 	const onSubmit = (data: any, e: any) => {
 		console.log('data', data)
-		console.log('email', data.email)
 		console.log('image in here', image)
 		e.preventDefault();
 		createImage({
 			variables: {
 				publicId: data.publicId,
 				folder: data.folder,
-				imageOne: data.imageOne,
+				imageOne: image,
 			},
 		});
-		// e.target.reset();
 	  };
-
-	// const onSubmit = data => console.log(data);
 
 	useEffect(() => {
 		(async () => {
@@ -71,8 +67,12 @@ export default function TabOneScreen() {
 	
 		
 		if (!result.cancelled) {
-		  console.log('result', result);
-		  setImage(result.uri);
+		//   console.log('result', result);
+		  let newimage = encodeURIComponent(result.base64 ? result.base64 : result.uri)
+		  let data_type = result.uri.split('.').pop();
+		  data_type = encodeURIComponent(data_type ? data_type : "jpg")
+		  newimage = `data%3Aimage%2F${data_type}%3Bbase64%2C${newimage}`
+		  setImage(newimage);
 		  console.log('local-image', image);
 		}
 
@@ -86,7 +86,6 @@ export default function TabOneScreen() {
 			<Text style={styles.title}>Home</Text>
 				<Input name="publicId" label="PublicId" control={control} />
 				<Input name="folder" label="Folder" control={control} />
-				<Input name="imageOne" label="Image" control={control}/>
 				<SelectImage onPress={pickImage} backgroundColor="blue">
 					<Text style={styles.title}>Select Image</Text>
 				</SelectImage>
