@@ -14,10 +14,10 @@ function Gallery({props}) {
                     <Image
                     style={styles.image}
                     source={{uri: `${pic.url}`}}
-                    key={pic.assetId}
+                    key={index}
                     >
                     </Image>
-                    <View style={styles.separator} key={pic.url} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+                    {/* <View style={styles.separator} key={pic.url} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" /> */}
                 </>
             )}
             )}

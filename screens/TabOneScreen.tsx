@@ -67,20 +67,20 @@ export default function TabOneScreen() {
 	
 		
 		if (!result.cancelled) {
-		//   console.log('result', result);
+		  console.log('result', result);
 		  let newimage = encodeURIComponent(result.base64 ? result.base64 : result.uri)
 		  let data_type = result.uri.split('.').pop();
 		  data_type = encodeURIComponent(data_type ? data_type : "jpg")
 		  newimage = `data%3Aimage%2F${data_type}%3Bbase64%2C${newimage}`
 		  setImage(newimage);
-		  console.log('local-image', image);
+		//   console.log('local-image', image);
 		}
 
 	  };
 
-	  if(image) {
-		  console.log('local-image', image);
-	  }
+	//   if(image) {
+	// 	  console.log('local-image', image);
+	//   }
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>Home</Text>

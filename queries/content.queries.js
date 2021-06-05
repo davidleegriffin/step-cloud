@@ -35,3 +35,12 @@ export const CREATE_IMAGE = gql`
 		}
 	}
 `;
+
+export const GET_PAGES = gql`
+	query getPages {
+		wordpressPages {
+			title
+			content
+		}
+	}
+`;
