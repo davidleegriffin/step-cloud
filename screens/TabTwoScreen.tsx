@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Platform, ScrollView, ImageBackground, Image } from 'react-native';
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { GET_IMAGES } from "../queries/content.queries.js";
 import { Text, View } from '../components/Themed';
 import Gallery from '../components/Gallery';

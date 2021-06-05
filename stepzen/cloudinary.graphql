@@ -18,7 +18,7 @@ type Query {
 			]
 			resultroot: ""
 			endpoint: "https://$api_key:$api_secret@api.cloudinary.com/v1_1/$cloud_name/resources/image?public_ids=$publicId"
-			configuration: "cloudinary_config"
+			configuration: "cloudinary_mutation"
 		)
 	cloudinaryImages: [Image]
 		@rest(
@@ -31,7 +31,7 @@ type Query {
 			]
 			resultroot: ""
 			endpoint: "https://$api_key:$api_secret@api.cloudinary.com/v1_1/$cloud_name/resources/image"
-			configuration: "cloudinary_config"
+			configuration: "cloudinary_mutation"
 		)
 }
 
@@ -55,11 +55,11 @@ type Mutation {
 #       ]
 #       resultroot: ""
 #       endpoint: "https://cloudbackend.ngrok.io?data_type=$data_type;&upload_preset=$upload_preset;&publicId=$publicId;&folder=$folder;&api_key=$api_key;&api_secret=$api_secret;&cloud_name=$cloud_name;"
-#       configuration: "cloudinary_config"
+#       configuration: "cloudinary_mutation"
 #     )
 	createImage(image: String!, folder: String!, publicId: String!): Image
 		@rest(
-		method: POST
+		method: "POST"
 		setters: [
 			{ field: "assetId", path: "asset_id" }
 			{ field: "publicId", path: "public_id" }
