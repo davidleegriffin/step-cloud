@@ -25,15 +25,16 @@ export default function TabTwoScreen() {
   console.log("dataWord", pages);
   const pics = data?.cloudinaryImages;
   // console.log('pics', pics);
+  const files = {pages, pics};
 
   if (loading || loadingWord) return <Text>Almost there...</Text>
-  if (error || errorWord) return <Text>{error.message}</Text>
+  if (error || errorWord) return <Text>{error?.message}</Text>
 
   return (
     <ScrollView contentContainerStyle={styles.contentContainer}>
       <Text style={styles.title}>Gallery</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <Gallery props={pics} />
+      <Gallery props={files} />
     </ScrollView>
   );
 }
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   title: {
-    fontSize: 20,
+    fontSize: 50,
     fontWeight: 'bold',
   },
 });

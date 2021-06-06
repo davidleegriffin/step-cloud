@@ -1,14 +1,29 @@
 import React from 'react';
 import {  StyleSheet, Image } from 'react-native';
 import { Text, View } from "./Themed";
+import { WebView } from 'react-native-webview';
 
 function Gallery({props}) {
 
-    // console.log('propsGallery', props)
+    console.log('propsGallery', props)
+    const {pages, pics} = props;
     
     return (
         <>
-        {Object.values(props).map((pic, index) => {
+        {Object.values(pages).map((page) => {
+            return (
+                <>
+                    <Text style={styles.title}>{page.title}</Text>
+                    <WebView 
+                        style={styles.content}
+                        originWhitelist={['*']}
+                        source={{html: `<h1 style="font-size:65px">${page.content}</h1>`}} 
+                    />
+                    {/* <Text>{page.content}</Text> */}
+                </>
+            )}
+            )}
+        {Object.values(pics).map((pic, index) => {
             return (
                 <>
                     <Image
@@ -35,6 +50,15 @@ function Gallery({props}) {
             marginVertical: 30,
             height: 1,
             width: "80%",
+        },
+        title : {
+            fontSize: 35,
+        },
+        content: {
+            flex: 1,
+            width: 350,
+            height: 750,
+            margin: 20,
         },
     });
     

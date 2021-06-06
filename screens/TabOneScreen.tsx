@@ -87,7 +87,7 @@ export default function TabOneScreen() {
 				<Input name="publicId" label="PublicId" control={control} />
 				<Input name="folder" label="Folder" control={control} />
 				<SelectImage onPress={pickImage} backgroundColor="blue">
-					<Text style={styles.title}>Select Image</Text>
+					<Text style={styles.picker}>Select Image</Text>
 				</SelectImage>
 				{/* {image && <Image source={{ uri: image }} style={{ width: 300, height: 300 }} />} */}
 				<Button title="submit" onPress={handleSubmit(onSubmit)} />
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
 		// justifyContent: "center",
 	},
 	title: {
-		fontSize: 20,
+		fontSize: 50,
 		fontWeight: "bold",
 	},
 	separator: {
