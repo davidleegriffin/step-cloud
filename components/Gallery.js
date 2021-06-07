@@ -10,10 +10,10 @@ function Gallery({props}) {
     
     return (
         <>
-        {Object.values(pages).map((page) => {
+        {Object.values(pages).map((page, idx) => {
             return (
                 <>
-                    <Text style={styles.title}>{page.title}</Text>
+                    <Text style={styles.title} key={idx}>{page.title}</Text>
                     <WebView 
                         style={styles.content}
                         originWhitelist={['*']}
@@ -23,6 +23,7 @@ function Gallery({props}) {
                 </>
             )}
             )}
+        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
         {Object.values(pics).map((pic, index) => {
             return (
                 <>
@@ -32,7 +33,6 @@ function Gallery({props}) {
                     key={index}
                     >
                     </Image>
-                    {/* <View style={styles.separator} key={pic.url} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" /> */}
                 </>
             )}
             )}
