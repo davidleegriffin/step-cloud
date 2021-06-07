@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Platform, ScrollView, ImageBackground, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, ScrollView } from 'react-native';
 import { useQuery } from "@apollo/client";
-import { GET_IMAGES, GET_IMAGE, GET_PAGES } from "../queries/content.queries.js";
-import { Text, View } from '../components/Themed';
+import {GET_IMAGES} from "../queries/content.queries.js";
+import {Text} from '../components/Themed';
 import Gallery from '../components/Gallery';
 
 export default function TabTwoScreen() {
@@ -14,33 +14,17 @@ export default function TabTwoScreen() {
     loading,
     error
   } = useQuery(GET_IMAGES);
-
-  const {
-    data: dataWord, 
-    loading: loadingWord, 
-    error: errorWord
-  } = useQuery(GET_PAGES);
-
-  const {
-    data: dataImage, 
-    loading: loadingImage, 
-    error: errorImage
-  } = useQuery(GET_IMAGE, {variables: {publicId: 'Sample Page'}});
-  
-  const pages = dataWord?.wordpressPages;
-  // console.log("dataWord", pages);
-  const pics = data?.cloudinaryImages;
-  console.log('test', dataImage);
  
-  const files = {pages, pics};
+  const pics = data?.cloudinaryImages;
+ 
+  const files = {pics};
 
-  if (loading || loadingWord) return <Text>Almost there...</Text>
-  if (error || errorWord) return <Text>{error?.message}</Text>
+  if (loading) return <Text>Almost there...</Text>
+  if (error) return <Text>{error?.message}</Text>
 
   return (
     <ScrollView contentContainerStyle={styles.contentContainer}>
       <Text style={styles.title}>Gallery</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <Gallery props={files} />
     </ScrollView>
   );

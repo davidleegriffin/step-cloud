@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Platform, Image, Button, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { Text, View } from "../components/Themed";
-import * as ImagePicker from 'expo-image-picker';
+// import * as ImagePicker from 'expo-image-picker';
 import { t } from 'react-native-tailwindcss';
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { GET_PAGES } from "../queries/content.queries.js";
-import SelectImage from '../components/SelectImage';
-import Input from '../components/Input';
+import Posts from '../components/Posts';
+// import SelectImage from '../components/SelectImage';
+// import Input from '../components/Input';
 
 
 // const CREATE_IMAGE = gql`
@@ -95,26 +96,44 @@ export default function TabOneScreen() {
 	// 	  console.log('local-image', image);
 	//   }
 	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>Home</Text>
-				{/* <Input name="publicId" label="PublicId" control={control} /> */}
-				{/* <Input name="folder" label="Folder" control={control} /> */}
-				{/* <SelectImage onPress={pickImage} backgroundColor="blue">
-					<Text style={styles.picker}>Select Image</Text>
-				</SelectImage> */}
-				{/* {image && <Image source={{ uri: image }} style={{ width: 300, height: 300 }} />} */}
-				{/* <Button title="submit" onPress={handleSubmit(onSubmit)} /> */}
-		</View>
+		<>
+			<View style={styles.container}>
+				<Text style={styles.title}>Home</Text>
+			</View>
+			{Object.values(pages).map((page, idx) => {
+				return (
+					<>
+						<Posts props={page} />
+						
+					</>
+				)}
+				)}
+		</>
 	);
 }
+
+// // 
+// 	
+// 
+// 		{/* <Input name="publicId" label="PublicId" control={control} /> */}
+// 		{/* <Input name="folder" label="Folder" control={control} /> */}
+// 		{/* <SelectImage onPress={pickImage} backgroundColor="blue">
+// 			<Text style={styles.picker}>Select Image</Text>
+// 		</SelectImage> */}
+// 		{/* {image && <Image source={{ uri: image }} style={{ width: 300, height: 300 }} />} */}
+// 		{/* <Button title="submit" onPress={handleSubmit(onSubmit)} /> */}
+// 
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: "center",
-		// justifyContent: "center",
+		
 	},
 	title: {
+		flex: 1,
+		alignItems: "center",
+		justifyContent: "center",
 		fontSize: 50,
 		fontWeight: "bold",
 	},

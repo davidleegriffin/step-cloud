@@ -5,37 +5,23 @@ import { WebView } from 'react-native-webview';
 
 function Gallery({props}) {
 
-    console.log('propsGallery', props)
-    const {pages, pics} = props;
+    const {pics} = props;
     
     return (
         <>
-        {Object.values(pages).map((page, idx) => {
-            return (
-                <>
-                    <Text style={styles.title} key={idx}>{page.title}</Text>
-                    <WebView 
-                        style={styles.content}
-                        originWhitelist={['*']}
-                        source={{html: `<h1 style="font-size:65px">${page.content}</h1>`}} 
-                    />
-                    {/* <Text>{page.content}</Text> */}
-                </>
-            )}
-            )}
-        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-        {Object.values(pics).map((pic, index) => {
-            return (
-                <>
-                    <Image
-                    style={styles.image}
-                    source={{uri: `${pic.url}`}}
-                    key={index}
-                    >
-                    </Image>
-                </>
-            )}
-            )}
+            {Object.values(pics).map((pic, index) => {
+                return (
+                    <>
+                        <Image
+                        style={styles.image}
+                        source={{uri: `${pic.url}`}}
+                        key={index}
+                        >
+                        </Image>
+                       
+                    </>
+                )}
+                )}
         </>
     )}
     
