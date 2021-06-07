@@ -21,6 +21,8 @@ type Query {
 				{ field: "content", path: "content.rendered" }
 			]
 			resultroot: ""
-			endpoint: "http://143.198.12.235/wp-json/wp/v2/pages"
+			endpoint: "http://143.198.12.235/wp-json/wp/v2/posts"
 		)
 }
+# http://143.198.12.235/wp-json/wp/v2/pages
+# https://public-api.wordpress.com/rest/v1.1/sites/blogdavia.wordpress.com/posts/
