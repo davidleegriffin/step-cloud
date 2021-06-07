@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
         flex: 1, 
         alignItems: 'center', 
         justifyContent: 'center', 
+        fontSize: 42,
 
     },
     image: {

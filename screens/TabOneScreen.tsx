@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Platform, Image, Button, TextInput } from "react-native";
-import { useForm, Controller } from "react-hook-form";
-import { Text, View } from "../components/Themed";
+import { StyleSheet, ScrollView,  Text, Image, Button, TextInput } from "react-native";
+// import { useForm, Controller } from "react-hook-form";
+// import { View } from "../components/Themed";
 // import * as ImagePicker from 'expo-image-picker';
 import { t } from 'react-native-tailwindcss';
 import { gql, useMutation, useQuery } from "@apollo/client";
@@ -97,9 +97,8 @@ export default function TabOneScreen() {
 	//   }
 	return (
 		<>
-			<View style={styles.container}>
-				<Text style={styles.title}>Home</Text>
-			</View>
+			<ScrollView contentContainerStyle={styles.contentContainer}>
+			<Text style={styles.title}>Home</Text>
 			{Object.values(pages).map((page, idx) => {
 				return (
 					<>
@@ -108,6 +107,7 @@ export default function TabOneScreen() {
 					</>
 				)}
 				)}
+			</ScrollView>
 		</>
 	);
 }
@@ -130,6 +130,12 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		
 	},
+	contentContainer: {
+		flexGrow: 1,
+		alignItems: 'center',
+		// justifyContent: 'center',
+		paddingVertical: 20,
+	  },
 	title: {
 		flex: 1,
 		alignItems: "center",
