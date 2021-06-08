@@ -1,5 +1,5 @@
 import React from 'react';
-import {  StyleSheet, Image } from 'react-native';
+import {  StyleSheet, Image, ScrollView } from 'react-native';
 import { Text, View } from "./Themed";
 import { WebView } from 'react-native-webview';
 
@@ -9,41 +9,35 @@ function Gallery({props}) {
     
     return (
         <>
-            {Object.values(pics).map((pic, index) => {
-                return (
-                    <>
-                        <Image
-                        style={styles.image}
-                        source={{uri: `${pic.url}`}}
-                        key={index}
-                        >
-                        </Image>
-                       
-                    </>
-                )}
-                )}
+            <ScrollView contentContainerStyle={styles.contentContainer}>
+                {Object.values(pics).map((pic, index) => {
+                    return (
+                        <>
+                            <Image
+                            style={styles.image}
+                            source={{uri: `${pic.url}`}}
+                            key={index}
+                            >
+                            </Image>
+                        
+                        </>
+                    )}
+                    )}
+            </ScrollView>
         </>
     )}
     
     const styles = StyleSheet.create ({
+        contentContainer: {
+            flexGrow: 1,
+            alignItems: 'center',
+            // justifyContent: 'center',
+            paddingVertical: 20,
+          },
         image: {
             flex: 1,
             width: 300,
             height: 300,
-            margin: 20,
-        },
-        separator: {
-            marginVertical: 30,
-            height: 1,
-            width: "80%",
-        },
-        title : {
-            fontSize: 35,
-        },
-        content: {
-            flex: 1,
-            width: 350,
-            height: 750,
             margin: 20,
         },
     });

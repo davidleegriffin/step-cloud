@@ -36,9 +36,9 @@ export const CREATE_IMAGE = gql`
 	}
 `;
 
-export const GET_PAGES = gql`
-	query getPages {
-		wordpressPages {
+export const GET_POSTS = gql`
+	query getPosts {
+		wordpressPosts {
 			title
 			content
 		}

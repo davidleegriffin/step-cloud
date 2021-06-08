@@ -5,7 +5,7 @@ import { StyleSheet, ScrollView,  Text, Image, Button, TextInput } from "react-n
 // import * as ImagePicker from 'expo-image-picker';
 import { t } from 'react-native-tailwindcss';
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { GET_PAGES } from "../queries/content.queries.js";
+import { GET_POSTS } from "../queries/content.queries.js";
 import Posts from '../components/Posts';
 // import SelectImage from '../components/SelectImage';
 // import Input from '../components/Input';
@@ -37,10 +37,11 @@ export default function TabOneScreen() {
 		data: dataWord, 
     	loading, 
     	error
-	} = useQuery(GET_PAGES);
+	} = useQuery(GET_POSTS);
 
-	const pages = dataWord?.wordpressPages;
-	console.log('tab1 pages', pages);
+	const wordPosts = dataWord?.wordpressPosts;
+	console.log('tab1 posts', wordPosts);
+	// setPosts(wordPosts);
 
 	if (loading) return <Text>Almost there...</Text>
 	if (error) return <Text>{error?.message}</Text>
@@ -99,10 +100,10 @@ export default function TabOneScreen() {
 		<>
 			<ScrollView contentContainerStyle={styles.contentContainer}>
 			<Text style={styles.title}>Home</Text>
-			{Object.values(pages).map((page, idx) => {
+			{Object.values(wordPosts).map((post, idx) => {
 				return (
 					<>
-						<Posts props={page} />
+						<Posts props={post} />
 						
 					</>
 				)}

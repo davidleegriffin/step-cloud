@@ -6,7 +6,7 @@ import { useQuery } from "@apollo/client";
 import {GET_IMAGE} from "../queries/content.queries.js";
 
 function Posts({props}) {
-    // console.log('propsPosts', props);
+    console.log('propsPosts', props);
 
     const {
         data, 
@@ -17,9 +17,9 @@ function Posts({props}) {
       if (loading) return <Text>Almost there...</Text>
       if (error) return <Text>{error?.message}</Text>
     
-    const pic = data.cloudinaryImage.url;
-
+      const pic = data.cloudinaryImage.url;
       console.log('postsImage', pic);
+      
 
     return (
         <>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         width: 350,
-        height: 750,
+        height: 350,
         margin: 20,
     },
 });

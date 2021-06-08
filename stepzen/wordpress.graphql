@@ -24,5 +24,33 @@ type Query {
 			endpoint: "http://143.198.12.235/wp-json/wp/v2/posts"
 		)
 }
-# http://143.198.12.235/wp-json/wp/v2/pages
-# https://public-api.wordpress.com/rest/v1.1/sites/blogdavia.wordpress.com/posts/
+type WPPost {
+    id: ID!
+    title: String!
+    content: String!
+    slug: String
+    featuredImage: String
+}
+
+type Query {
+wordpressPosts: [WPPost]
+        @rest (
+             setters: [
+                {field: "id", path: "ID"},
+                {field: "featuredImage", path: "featured_image"}
+            ]
+            resultroot: "posts[]"
+            endpoint: "https://public-api.wordpress.com/rest/v1.1/sites/blogdavia.wordpress.com/posts/"
+		)
+}
+type Query {
+wordpressPost(id: ID!): WPPost
+        @rest (
+             setters: [
+                {field: "id", path: "ID"},
+                {field: "featuredImage", path: "featured_image"}
+            ]
+            resultroot: ""
+            endpoint: "https://public-api.wordpress.com/rest/v1.1/sites/blogdavia.wordpress.com/posts/$id?_embed"
+		)
+}
