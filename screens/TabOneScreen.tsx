@@ -28,10 +28,9 @@ import Posts from '../components/Posts';
 // `;
 
 export default function TabOneScreen() {
-    // const [createImage, { data }] = useMutation(CREATE_IMAGE);
 
 	const [image, setImage] = useState("");
-	const [posts, setPosts] = useState("");
+	// const [posts, setPosts] = useState("");
 
 	const {
 		data: dataWord, 
@@ -93,9 +92,6 @@ export default function TabOneScreen() {
 
 	//   };
 
-	//   if(image) {
-	// 	  console.log('local-image', image);
-	//   }
 	return (
 		<>
 			<ScrollView contentContainerStyle={styles.contentContainer}>
