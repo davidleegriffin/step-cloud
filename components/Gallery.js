@@ -12,7 +12,7 @@ function Gallery({props}) {
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 {Object.values(pics).map((pic, index) => {
                     return (
-                        <>
+                        
                             <Image
                             style={styles.image}
                             source={{uri: `${pic.url}`}}
@@ -20,7 +20,7 @@ function Gallery({props}) {
                             >
                             </Image>
                         
-                        </>
+                        
                     )}
                     )}
             </ScrollView>

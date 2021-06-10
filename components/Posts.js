@@ -12,12 +12,12 @@ function Posts({props}) {
         data, 
         loading, 
         error
-      } = useQuery(GET_IMAGE, {variables: {publicId: `${props.title}`}});
+      } = useQuery(GET_IMAGE, {variables: {publicId: `${encodeURIComponent(props.title)}`}});
 
       if (loading) return <Text>Almost there...</Text>
       if (error) return <Text>{error?.message}</Text>
     
-      const pic = data.cloudinaryImage.url;
+      const pic = data?.cloudinaryImage.url;
       console.log('postsImage', pic);
       
 
@@ -36,6 +36,7 @@ function Posts({props}) {
                 originWhitelist={['*']}
                 source={{html: `<h1 style="font-size:65px">${props.content}</h1>`}} 
             />
+            {props.content}
         </>
     )
 }
