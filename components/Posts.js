@@ -6,7 +6,6 @@ import { useQuery } from "@apollo/client";
 import {GET_IMAGE} from "../queries/content.queries.js";
 
 function Posts({props}) {
-    console.log('propsPosts', props);
 
     const {
         data, 
@@ -16,10 +15,13 @@ function Posts({props}) {
 
       if (loading) return <Text>Almost there...</Text>
       if (error) return <Text>{error?.message}</Text>
-    
-      const pic = data?.cloudinaryImage.url;
-      console.log('postsImage', pic);
-      
+
+    let pic = "";
+    if(data?.cloudinaryImage===null) {
+        pic="https://picsum.photos/200/300"
+    } else {
+        pic = data?.cloudinaryImage.url; 
+    };
 
     return (
         <>
@@ -36,7 +38,6 @@ function Posts({props}) {
                 originWhitelist={['*']}
                 source={{html: `<h1 style="font-size:65px">${props.content}</h1>`}} 
             />
-            {props.content}
         </>
     )
 }

@@ -1,7 +1,5 @@
 import React from 'react';
 import {  StyleSheet, Image, ScrollView } from 'react-native';
-import { Text, View } from "./Themed";
-import { WebView } from 'react-native-webview';
 
 function Gallery({props}) {
 
@@ -12,15 +10,12 @@ function Gallery({props}) {
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 {Object.values(pics).map((pic, index) => {
                     return (
-                        
-                            <Image
-                            style={styles.image}
-                            source={{uri: `${pic.url}`}}
-                            key={index}
-                            >
-                            </Image>
-                        
-                        
+                        <Image
+                        style={styles.image}
+                        source={{uri: `${pic.url}`}}
+                        key={index}
+                        >
+                        </Image>
                     )}
                     )}
             </ScrollView>
@@ -31,7 +26,6 @@ function Gallery({props}) {
         contentContainer: {
             flexGrow: 1,
             alignItems: 'center',
-            // justifyContent: 'center',
             paddingVertical: 20,
           },
         image: {

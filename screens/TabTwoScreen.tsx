@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { useQuery } from "@apollo/client";
 import {GET_IMAGES} from "../queries/content.queries.js";
@@ -7,13 +7,13 @@ import Gallery from '../components/Gallery';
 
 export default function TabTwoScreen() {
 
-  const [image, setImage] = useState();
-
   const {
     data,
     loading,
     error
   } = useQuery(GET_IMAGES);
+
+  // console.log('data', data);
  
   const pics = data?.cloudinaryImages;
  
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     flexGrow: 1,
     alignItems: 'center',
-    // justifyContent: 'center',
     paddingVertical: 20,
   },
   bgImage: {
