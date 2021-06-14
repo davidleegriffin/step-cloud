@@ -18,7 +18,7 @@ type Query {
 			]
 			resultroot: ""
 			endpoint: "https://$api_key:$api_secret@api.cloudinary.com/v1_1/$cloud_name/resources/image?public_ids=$publicId"
-			configuration: "cloudinary_mutation"
+			configuration: "cloudinary_config"
 		)
 	cloudinaryImages: [Image]
 		@rest(
@@ -31,7 +31,7 @@ type Query {
 			]
 			resultroot: ""
 			endpoint: "https://$api_key:$api_secret@api.cloudinary.com/v1_1/$cloud_name/resources/image"
-			configuration: "cloudinary_mutation"
+			configuration: "cloudinary_config"
 		)
 }
 
@@ -53,6 +53,6 @@ type Mutation {
       	]
 		postbody: "file={{.Get \\\"image\\\"}}&public_id={{.Get \\\"publicId\\\"}}&upload_preset={{.Get \\\"upload_preset\\\"}}&folder={{.Get \\\"folder\\\"}}"
 		endpoint: "https://api.cloudinary.com/v1_1/$cloud_name/image/upload"
-		configuration: "cloudinary_mutation"
+		configuration: "cloudinary_config"
 		)
 }
