@@ -1,0 +1,6 @@
+configurationset:
+ - configuration:
+     name: cloudinary_config
+     api_key: <your cloudinary api key>
+     api_secret: <your cloudinary api secret here>
+     cloud_name: <your cloudinary name here>

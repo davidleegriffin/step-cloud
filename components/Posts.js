@@ -17,10 +17,10 @@ function Posts({props}) {
       if (error) return <Text>{error?.message}</Text>
 
     let pic = "";
-    if(data?.cloudinaryImage===null) {
-        pic="https://picsum.photos/200/300"
-    } else {
+    if(data?.cloudinaryImage) {
         pic = data?.cloudinaryImage.url; 
+    } else {
+        pic="https://picsum.photos/200/300"
     };
 
     return (
